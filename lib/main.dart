@@ -1,5 +1,6 @@
 import 'package:cosmic/core/routing/app_router.dart';
 import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
+import 'package:cosmic/features/home/presentation/home_screen.dart';
 import 'package:cosmic/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         onGenerateRoute: AppRouter.generateRoute,
 
-        home: const SplashScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

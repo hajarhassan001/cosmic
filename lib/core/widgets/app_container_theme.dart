@@ -20,7 +20,7 @@ class AppContainer extends StatelessWidget {
       height: height,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColor.surface,
+        color: AppColor.surface.withOpacity(0.5),
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
