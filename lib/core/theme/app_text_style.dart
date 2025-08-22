@@ -25,4 +25,9 @@ class AppTextStyles {
     fontWeight: FontWeight.bold,
     color: AppColor.textPrimary,
   );
+  static const TextStyle h4bold18 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: AppColor.primaryColor,
+  );
 }

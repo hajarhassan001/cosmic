@@ -1,8 +1,9 @@
 import 'package:cosmic/core/routing/app_router.dart';
+import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
 import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
 import 'package:cosmic/features/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,14 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [BlocProvider<HomeCubit>(create: (context) => HomeCubit())],
+    // return MultiBlocProvider(
+    //   providers: [BlocProvider<HomeCubit>(create: (context) => HomeCubit())],
 
-      child: MaterialApp(
-        onGenerateRoute: AppRouter.generateRoute,
+    //   child: MaterialApp(
+    //     onGenerateRoute: AppRouter.generateRoute,
 
-        home: const SplashScreen(),
-      ),
+    //     home: const SplashScreen(),
+    //   ),
+    // );
+    return MaterialApp(
+      home: LogInScreen(),
     );
+
   }
 }
