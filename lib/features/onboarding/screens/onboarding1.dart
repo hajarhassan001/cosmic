@@ -1,3 +1,4 @@
+import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class Page1 extends StatelessWidget {
@@ -9,7 +10,7 @@ class Page1 extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: Image.asset("assets/bg2.png", fit: BoxFit.cover),
+            child: Image.asset("assets/images/BG.png", fit: BoxFit.cover),
           ),
 
           Positioned.fill(
@@ -47,7 +48,7 @@ class Page1 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Page1()),
+                        MaterialPageRoute(builder: (context) => LogInScreen()),
                       );
                     },
                     style: ElevatedButton.styleFrom(
