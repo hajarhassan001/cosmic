@@ -1,6 +1,4 @@
-import 'package:cosmic/core/routing/app_router.dart';
 import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
-import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 
 void main() {
