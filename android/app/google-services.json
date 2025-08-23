@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94383412361",
+    "project_id": "cosmic-9c396",
+    "storage_bucket": "cosmic-9c396.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94383412361:android:8a9c9b81176a0671e46258",
+        "android_client_info": {
+          "package_name": "com.example.cosmic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD6Ny7_ScPvoLYtjNpA7g0_cAOqI64ZaE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
