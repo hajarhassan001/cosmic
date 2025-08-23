@@ -1,6 +1,6 @@
-import 'package:cosmic/core/extentions/context_extention.dart';
-import 'package:cosmic/core/widgets/app_container_theme.dart';
 import 'package:flutter/material.dart';
+
+import 'onboarding1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,23 +11,40 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Page1()),
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final size = context.media.size;
-    final width = size.width;
-    final height = size.height;
     return Scaffold(
       body: Stack(
+        fit: StackFit.expand,
         children: [
-          SizedBox.expand(
-            child: Image.asset("assets/images/Splash.png", fit: BoxFit.cover),
+          Image.asset(
+            "assets/Splash.png",
+            fit: BoxFit.cover,
           ),
           Center(
-            child: AppContainer(
-              width: 200,
-              height: 200,
-              child: const Text(
-                "Cosmic",
-                style: TextStyle(color: Colors.white),
+            child: Text(
+              "Cosmic",
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    blurRadius: 10,
+                    color: Colors.black45,
+                    offset: Offset(2, 4),
+                  ),
+                ],
               ),
             ),
           ),
@@ -36,3 +53,4 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
+
