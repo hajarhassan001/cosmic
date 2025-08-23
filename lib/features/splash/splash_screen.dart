@@ -1,6 +1,5 @@
+import 'package:cosmic/features/onboarding/screens/onboarding1.dart';
 import 'package:flutter/material.dart';
-
-import 'onboarding1.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,10 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            "assets/Splash.png",
-            fit: BoxFit.cover,
-          ),
+          Image.asset("assets/Splash.png", fit: BoxFit.cover),
           Center(
             child: Text(
               "Cosmic",
@@ -53,4 +49,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
