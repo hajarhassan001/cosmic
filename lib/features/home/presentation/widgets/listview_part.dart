@@ -3,11 +3,12 @@ import 'package:cosmic/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ListviewPart extends StatelessWidget {
-  final bool isSelelcted;
-  final VoidCallback onSelect;
+  final String? selectedPlanetName;
+  final Function(String) onSelect;
+
   const ListviewPart({
     super.key,
-    required this.isSelelcted,
+    required this.selectedPlanetName,
     required this.onSelect,
   });
 
@@ -17,15 +18,15 @@ class ListviewPart extends StatelessWidget {
     final width = size.width;
     final height = size.height;
 
-    List<Map<String, String>> planets = [
-      {"name": "Mercury", "image": "assets/images/mercury.png"},
-      {"name": "Venus", "image": "assets/images/venus.png"},
-      {"name": "Earth", "image": "assets/images/earth.png"},
-      {"name": "Mars", "image": "assets/images/mars.png"},
-      {"name": "Jupiter", "image": "assets/images/jupiter.png"},
-      {"name": "Saturn", "image": "assets/images/saturn.png"},
-      {"name": "Uranus", "image": "assets/images/uranus.png"},
-      {"name": "Neptune", "image": "assets/images/neptune.png"},
+    final List<Map<String, String>> planets = [
+      {"name": "Mercury", "image": "assets/images/planet.png"},
+      {"name": "Venus", "image": "assets/images/planet (1).png"},
+      {"name": "Earth", "image": "assets/images/planet (2).png"},
+      {"name": "Mars", "image": "assets/images/planet (3).png"},
+      {"name": "Jupiter", "image": "assets/images/planet (1).png"},
+      {"name": "Saturn", "image": "assets/images/planet (2).png"},
+      {"name": "Uranus", "image": "assets/images/planet (3).png"},
+      {"name": "Neptune", "image": "assets/images/planet.png"},
     ];
 
     return ListView.builder(
@@ -33,31 +34,43 @@ class ListviewPart extends StatelessWidget {
       itemCount: planets.length,
       itemBuilder: (context, index) {
         final planet = planets[index];
+        final name = planet["name"]!;
+        final image = planet["image"]!;
+
+        final isSelected = selectedPlanetName == name;
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: onSelect,
+            onTap: () => onSelect(name),
             child: Container(
               height: height * 48 / 812,
               width: width * 95 / 375,
               decoration: BoxDecoration(
-                color: isSelelcted
-                    ? Color(0xff00C8B3)
+                color: isSelected
+                    ? const Color(0xff00C8B3)
                     : AppColor.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(28),
               ),
-
-              child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  planet["name"]!,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColor.textPrimary,
-                    fontWeight: FontWeight.bold,
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: height * 24 / 812,
+                    width: width * 24 / 375,
+                    child: Image.asset(image),
                   ),
-                ),
+                  Expanded(
+                    child: Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColor.textPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
