@@ -32,6 +32,7 @@ class LogInScreen extends StatelessWidget {
               ),
             ),
           ),
+
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
             if (state is AuthFailure) {
@@ -39,7 +40,7 @@ class LogInScreen extends StatelessWidget {
                 SnackBar(content: Text(state.message)),
             );}
             else if (state is AuthSuccess){
-            Navigator.pushReplacementNamed(context, Routes.homeScreen);
+            Navigator.pushReplacementNamed(context, Routes.mainScreen);
             }
             },
             builder: (context, state) {
@@ -99,6 +100,9 @@ class LogInScreen extends StatelessWidget {
                 ),
               );
             },
+
+          
+
           ),
         ],
       ),

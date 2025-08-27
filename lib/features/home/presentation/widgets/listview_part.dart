@@ -1,15 +1,14 @@
 import 'package:cosmic/core/extentions/context_extention.dart';
+import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/core/theme/app_colors.dart';
+import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListviewPart extends StatelessWidget {
-  final bool isSelelcted;
-  final VoidCallback onSelect;
-  const ListviewPart({
-    super.key,
-    required this.isSelelcted,
-    required this.onSelect,
-  });
+  final String? selectedName;
+
+  const ListviewPart({super.key, required this.selectedName});
 
   @override
   Widget build(BuildContext context) {
@@ -17,15 +16,15 @@ class ListviewPart extends StatelessWidget {
     final width = size.width;
     final height = size.height;
 
-    List<Map<String, String>> planets = [
-      {"name": "Mercury", "image": "assets/images/mercury.png"},
-      {"name": "Venus", "image": "assets/images/venus.png"},
-      {"name": "Earth", "image": "assets/images/earth.png"},
-      {"name": "Mars", "image": "assets/images/mars.png"},
-      {"name": "Jupiter", "image": "assets/images/jupiter.png"},
-      {"name": "Saturn", "image": "assets/images/saturn.png"},
-      {"name": "Uranus", "image": "assets/images/uranus.png"},
-      {"name": "Neptune", "image": "assets/images/neptune.png"},
+    final List<Map<String, String>> planets = [
+      {"name": "Mercury", "image": "assets/images/planet.png"},
+      {"name": "Venus", "image": "assets/images/planet (1).png"},
+      {"name": "Earth", "image": "assets/images/planet (2).png"},
+      {"name": "Mars", "image": "assets/images/planet (3).png"},
+      {"name": "Jupiter", "image": "assets/images/planet (1).png"},
+      {"name": "Saturn", "image": "assets/images/planet (2).png"},
+      {"name": "Uranus", "image": "assets/images/planet (3).png"},
+      {"name": "Neptune", "image": "assets/images/planet.png"},
     ];
 
     return ListView.builder(
@@ -33,30 +32,49 @@ class ListviewPart extends StatelessWidget {
       itemCount: planets.length,
       itemBuilder: (context, index) {
         final planet = planets[index];
+        final name = planet["name"]!;
+        final image = planet["image"]!;
 
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: onSelect,
+            onTap: () {
+              context.read<HomeCubit>().selectPlanet(name);
+              Navigator.pushNamed(
+                context,
+                Routes.planetScreen,
+                arguments: name,
+              );
+            },
             child: Container(
               height: height * 48 / 812,
-              width: width * 95 / 375,
+              width: width * 100 / 375,
               decoration: BoxDecoration(
-                color: isSelelcted
-                    ? Color(0xff00C8B3)
+                color: selectedName == name
+                    ? AppColor.primaryColor.withOpacity(0.5)
                     : AppColor.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(28),
               ),
-
-              child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  planet["name"]!,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColor.textPrimary,
-                    fontWeight: FontWeight.bold,
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: height * 35 / 812,
+                      width: width * 35 / 375,
+                      child: Image.asset(image),
+                    ),
+                    Text(
+                      name,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: AppColor.textPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
