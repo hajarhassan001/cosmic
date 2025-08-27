@@ -59,7 +59,7 @@ class LogInScreen extends StatelessWidget {
                   AppColor.primaryColor,
                 ],
                 onPressed: () {
-                  Navigator.pushReplacementNamed(context, Routes.homeScreen);
+                  Navigator.pushReplacementNamed(context, Routes.mainScreen);
                 },
               ),
               Spacer(),

@@ -1,6 +1,7 @@
 import 'package:cosmic/core/routing/app_router.dart';
 import 'package:cosmic/features/home/data/remote/datadase_firestore.dart';
 import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
+import 'package:cosmic/features/inner_page/presentation/cubit/planet_cubit.dart';
 import 'package:cosmic/features/splash/splash_screen.dart';
 import 'package:cosmic/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,21 +16,25 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HomeCubit>(
-          create: (context) => HomeCubit(FirebaseHomeService()),
+        BlocProvider<HomeCubit>(create: (context) => HomeCubit()),
+        BlocProvider<PlanetCubit>(
+          create: (context) => PlanetCubit(FirebaseHomeService()),
         ),
       ],
 
-      child: MaterialApp(
-        onGenerateRoute: AppRouter.generateRoute,
+      child: SafeArea(
+        child: MaterialApp(
+          onGenerateRoute: AppRouter.generateRoute,
+          debugShowCheckedModeBanner: false,
 
-        home: const SplashScreen(),
+          home: const SplashScreen(),
+        ),
       ),
     );
   }

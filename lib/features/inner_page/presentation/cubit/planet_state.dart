@@ -1,8 +1,6 @@
 part of 'planet_cubit.dart';
 
-
-
-abstract class PlanetState extends Equatable {
+sealed class PlanetState extends Equatable {
   @override
   List<Object?> get props => [];
 }

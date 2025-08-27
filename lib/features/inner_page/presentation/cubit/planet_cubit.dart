@@ -21,4 +21,14 @@ class PlanetCubit extends Cubit<PlanetState> {
       emit(PlanetError(e.toString()));
     }
   }
+
+  Future<void> getPlanetOfTheDay() async {
+    emit(PlanetLoading());
+    try {
+      final planet = await firebaseHomeService.getPlanetOfTheDay();
+      emit(PlanetSuccess(planet));
+    } catch (e) {
+      emit(PlanetError(e.toString()));
+    }
+  }
 }

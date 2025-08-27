@@ -1,16 +1,14 @@
 import 'package:cosmic/core/extentions/context_extention.dart';
+import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/core/theme/app_colors.dart';
+import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ListviewPart extends StatelessWidget {
-  final String? selectedPlanetName;
-  final Function(String) onSelect;
+  final String? selectedName;
 
-  const ListviewPart({
-    super.key,
-    required this.selectedPlanetName,
-    required this.onSelect,
-  });
+  const ListviewPart({super.key, required this.selectedName});
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +35,37 @@ class ListviewPart extends StatelessWidget {
         final name = planet["name"]!;
         final image = planet["image"]!;
 
-        final isSelected = selectedPlanetName == name;
-
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: () => onSelect(name),
+            onTap: () {
+              context.read<HomeCubit>().selectPlanet(name);
+              Navigator.pushNamed(
+                context,
+                Routes.planetScreen,
+                arguments: name,
+              );
+            },
             child: Container(
               height: height * 48 / 812,
-              width: width * 95 / 375,
+              width: width * 100 / 375,
               decoration: BoxDecoration(
-                color: isSelected
-                    ? const Color(0xff00C8B3)
+                color: selectedName == name
+                    ? AppColor.primaryColor.withOpacity(0.5)
                     : AppColor.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(28),
               ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    height: height * 24 / 812,
-                    width: width * 24 / 375,
-                    child: Image.asset(image),
-                  ),
-                  Expanded(
-                    child: Text(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      height: height * 35 / 812,
+                      width: width * 35 / 375,
+                      child: Image.asset(image),
+                    ),
+                    Text(
                       name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -69,8 +74,8 @@ class ListviewPart extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

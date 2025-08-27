@@ -1,5 +1,4 @@
 class PlanetModel {
-  final String id;
   final String name;
   final String info;
   final String image;
@@ -12,7 +11,6 @@ class PlanetModel {
   final double distance;
 
   PlanetModel({
-    required this.id,
     required this.name,
     required this.info,
     required this.image,
@@ -25,19 +23,18 @@ class PlanetModel {
     required this.distance,
   });
 
-  factory PlanetModel.fromJson(Map<String, dynamic> json, String id) {
+  factory PlanetModel.fromJson(Map<String, dynamic> json) {
     return PlanetModel(
-      id: id,
       name: json['name'],
       info: json['info'],
       image: json['image'],
       order: json['order'],
-      mass: (json['mass'] as num).toDouble(),
-      gravity: (json['gravity'] as num).toDouble(),
-      day: (json['day'] as num).toDouble(),
-      velocity: (json['velocity'] as num).toDouble(),
-      temp: (json['temp'] as num).toDouble(),
-      distance: (json['distance'] as num).toDouble(),
+      mass: (json['mass']),
+      gravity: (json['gravity']),
+      day: (json['day']),
+      velocity: (json['velocity']),
+      temp: (json['temp']),
+      distance: (json['distance']),
     );
   }
 }
