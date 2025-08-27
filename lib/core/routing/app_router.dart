@@ -1,10 +1,14 @@
 import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
+import 'package:cosmic/features/auth/sign_up/sign_up_screen.dart';
+import 'package:cosmic/features/home/presentation/home_screen.dart'
+  
 import 'package:cosmic/features/favourites/presentation/favourites_screen.dart';
 import 'package:cosmic/features/home/presentation/home_screen.dart';
 import 'package:cosmic/features/home/presentation/main_screen.dart';
 import 'package:cosmic/features/inner_page/presentation/planet_screen.dart';
 import 'package:cosmic/features/notes/presentation/notes_screen.dart';
+
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -12,6 +16,9 @@ class AppRouter {
     switch (settings.name) {
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => LogInScreen());
+
+      case Routes.signUpScreen:
+        return MaterialPageRoute(builder: (_) =>  SignUpScreen());
 
       case Routes.planetScreen:
         final planetName = settings.arguments as String;
