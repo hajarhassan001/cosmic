@@ -1,4 +1,6 @@
 import 'package:cosmic/core/routing/routes.dart';
+import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
+import 'package:cosmic/features/auth/sign_up/sign_up_screen.dart';
 import 'package:cosmic/features/home/presentation/home_screen.dart'
     show HomeScreen;
 import 'package:flutter/material.dart';
@@ -6,11 +8,11 @@ import 'package:flutter/material.dart';
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      // case Routes.loginScreen:
-      //   return MaterialPageRoute(builder: (_) => const LoginScreen());
+      case Routes.loginScreen:
+        return MaterialPageRoute(builder: (_) => LogInScreen());
 
-      // case Routes.registerScreen:
-      //   return MaterialPageRoute(builder: (_) => const RegisterScreen());
+      case Routes.signUpScreen:
+        return MaterialPageRoute(builder: (_) =>  SignUpScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
