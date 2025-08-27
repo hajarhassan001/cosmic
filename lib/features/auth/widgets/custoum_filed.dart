@@ -17,24 +17,41 @@ class CustoumFiled extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget textField = TextField(
-      controller: controller,
-      obscureText: obscureText,
-      decoration: InputDecoration(
-        labelText: label,
-        labelStyle: TextStyle( color: AppColor.textPrimary),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.horizontal(
+    Widget textField = Material(
+      elevation: 5,
+      shadowColor: Colors.black.withOpacity(0.3),
+      borderRadius: const BorderRadius.all(Radius.circular(25)),
+      color: Colors.black.withOpacity(0.5),
+      child: TextField(
+        style: TextStyle(color: AppColor.textPrimary),
+        controller: controller,
+        obscureText: obscureText,
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle( color: AppColor.textPrimary),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.horizontal(
+              left: Radius.circular(25),   
+              right: Radius.circular(25),  
+            ),
+            borderSide: BorderSide(
+              color: AppColor.textPrimary,  
+              width: 1, 
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.horizontal(
             left: Radius.circular(25),   
-            right: Radius.circular(25),  
-          ),
-          borderSide: BorderSide(
-            color: AppColor.textPrimary,  
-            width: 1, 
-          ),
+            right: Radius.circular(25),),
+            borderSide: BorderSide(
+            color: Colors.white,
+            width: 3,
+
+          
+          )
         ),
       ),
-    );
+    ));
 
   
     if (padding != null) {
