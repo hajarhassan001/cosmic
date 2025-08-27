@@ -1,7 +1,6 @@
 import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
 import 'package:cosmic/features/auth/sign_up/sign_up_screen.dart';
-import 'package:cosmic/features/home/presentation/home_screen.dart'
   
 import 'package:cosmic/features/favourites/presentation/favourites_screen.dart';
 import 'package:cosmic/features/home/presentation/home_screen.dart';

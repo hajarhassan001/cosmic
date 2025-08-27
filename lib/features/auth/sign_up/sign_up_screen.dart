@@ -4,7 +4,6 @@ import 'package:cosmic/core/theme/app_colors.dart';
 import 'package:cosmic/core/theme/app_text_style.dart';
 import 'package:cosmic/features/auth/cubit/auth-logic.dart';
 import 'package:cosmic/features/auth/cubit/auth_state.dart';
-import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
 import 'package:cosmic/features/auth/widgets/custoum_button.dart';
 import 'package:cosmic/features/auth/widgets/custoum_filed.dart';
 import 'package:flutter/material.dart';
@@ -25,25 +24,25 @@ class SignUpScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-        Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-          image: DecorationImage(       
-          image: AssetImage('assets/images/BG.png'),
-          fit: BoxFit.cover,
+          Container(
+            width: width,
+            height: height,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/BG.png'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
           BlocConsumer<AuthCubit, AuthState>(
             listener: (context, state) {
-            if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
-            );}
-            else if (state is AuthSuccess){
-            Navigator.pushReplacementNamed(context, Routes.homeScreen);
-            }
+              if (state is AuthFailure) {
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(SnackBar(content: Text(state.message)));
+              } else if (state is AuthSuccess) {
+                Navigator.pushReplacementNamed(context, Routes.mainScreen);
+              }
             },
             builder: (context, state) {
               return Padding(
@@ -52,8 +51,9 @@ class SignUpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Align(
-                     alignment: Alignment.centerLeft, 
-                    child: Text('Sign up', style: AppTextStyles.h1bold32)),
+                      alignment: Alignment.centerLeft,
+                      child: Text('Sign up', style: AppTextStyles.h1bold32),
+                    ),
                     SizedBox(height: height * 20 / 812),
                     CustoumFiled(
                       controller: usernamecontroler,
@@ -105,9 +105,9 @@ class SignUpScreen extends StatelessWidget {
                       ],
                       onPressed: () {
                         context.read<AuthCubit>().signUp(
-                              usernamecontroler.text,
-                              emailcontroler.text,
-                              passwordcontroler.text,
+                          usernamecontroler.text,
+                          emailcontroler.text,
+                          passwordcontroler.text,
                         );
                       },
                     ),
