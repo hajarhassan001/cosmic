@@ -1,6 +1,6 @@
 
 import 'package:cosmic/features/home/data/models/planet_model.dart';
-import 'package:cosmic/features/home/data/remote/database_fire.dart';
+import 'package:cosmic/features/favourites/remote/database_firebase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:cosmic/features/home/data/remote/datadase_firestore.dart';
