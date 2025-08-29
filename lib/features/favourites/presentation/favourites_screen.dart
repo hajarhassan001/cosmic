@@ -2,10 +2,10 @@ import 'package:cosmic/core/extentions/context_extention.dart';
 import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/core/theme/app_colors.dart';
 import 'package:cosmic/core/theme/app_text_style.dart';
+import 'package:cosmic/features/favourites/cubit/favourites_cubit.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:cosmic/features/favourites/presentation/cubit/favourites_cubit.dart';
 
 
 
