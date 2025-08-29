@@ -1,4 +1,5 @@
 import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
+import 'package:cosmic/features/onboarding/screens/onboarding2.dart';
 import 'package:flutter/material.dart';
 
 class Page1 extends StatelessWidget {
@@ -48,7 +49,7 @@ class Page1 extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LogInScreen()),
+                        MaterialPageRoute(builder: (context) => Page2()),
                       );
                     },
                     style: ElevatedButton.styleFrom(

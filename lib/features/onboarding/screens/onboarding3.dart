@@ -1,3 +1,4 @@
+import 'package:cosmic/features/auth/log_in/log_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class Page3 extends StatelessWidget {
@@ -8,12 +9,8 @@ class Page3 extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-
           Positioned.fill(
-            child: Image.asset(
-              "assets/bg2.png",
-              fit: BoxFit.cover,
-            ),
+            child: Image.asset("assets/images/BG.png", fit: BoxFit.cover),
           ),
 
           Positioned.fill(
@@ -51,15 +48,21 @@ class Page3 extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Get Started Clicked!"),
+                          const SnackBar(content: Text("Get Started Clicked!")),
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LogInScreen(),
                           ),
                         );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.deepPurpleAccent,
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 40, vertical: 15),
+                          horizontal: 40,
+                          vertical: 15,
+                        ),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),

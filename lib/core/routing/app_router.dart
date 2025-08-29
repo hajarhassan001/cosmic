@@ -7,6 +7,8 @@ import 'package:cosmic/features/home/presentation/home_screen.dart';
 import 'package:cosmic/features/home/presentation/main_screen.dart';
 import 'package:cosmic/features/inner_page/presentation/planet_screen.dart';
 import 'package:cosmic/features/notes/presentation/notes_screen.dart';
+import 'package:cosmic/features/onboarding/screens/onboarding2.dart';
+import 'package:cosmic/features/onboarding/screens/onboarding3.dart';
 import 'package:cosmic/features/profile/presentation/profile_screen.dart';
 
 import 'package:flutter/material.dart';
@@ -14,6 +16,11 @@ import 'package:flutter/material.dart';
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.onboarding2:
+        return MaterialPageRoute(builder: (_) => Page2());
+      case Routes.onboarding3:
+        return MaterialPageRoute(builder: (_) => Page3());
+
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => LogInScreen());
 
@@ -40,8 +47,9 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => MainScreen());
       default:
         return MaterialPageRoute(
-          builder: (_) =>
-              const Scaffold(body: Center(child: Text('Page not found'))),
+          builder:
+              (_) =>
+                  const Scaffold(body: Center(child: Text('Page not found'))),
         );
     }
   }

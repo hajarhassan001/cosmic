@@ -12,7 +12,7 @@ class Page2 extends StatelessWidget {
 
           Positioned.fill(
             child: Image.asset(
-              "assets/bg2.png",
+              "assets/images/BG.png",
               fit: BoxFit.cover,
             ),
           ),
