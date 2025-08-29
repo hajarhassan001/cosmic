@@ -54,6 +54,7 @@ class ListviewPart extends StatelessWidget {
                     ? AppColor.primaryColor.withOpacity(0.5)
                     : AppColor.surface.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(28),
+                border: Border.all(color: AppColor.surface),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

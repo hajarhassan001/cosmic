@@ -22,6 +22,20 @@ class PlanetModel {
     required this.temp,
     required this.distance,
   });
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'info': info,
+      'image': image,
+      'order': order,
+      'mass': mass,
+      'gravity': gravity,
+      'day': day,
+      'velocity': velocity,
+      'temp': temp,
+      'distance': distance,
+    };
+  }
 
   factory PlanetModel.fromJson(Map<String, dynamic> json) {
     return PlanetModel(

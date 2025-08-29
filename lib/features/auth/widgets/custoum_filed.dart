@@ -7,7 +7,7 @@ class CustoumFiled extends StatelessWidget {
   final bool obscureText;
   final EdgeInsetsGeometry? padding;
 
-  CustoumFiled({
+  const CustoumFiled({
     super.key,
     required this.label,
     required this.obscureText,

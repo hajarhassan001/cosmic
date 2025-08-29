@@ -1,9 +1,10 @@
 import 'package:cosmic/core/extentions/context_extention.dart';
-import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/core/theme/app_colors.dart';
 import 'package:cosmic/core/theme/app_text_style.dart';
 import 'package:cosmic/features/home/data/remote/datadase_firestore.dart';
 import 'package:cosmic/features/inner_page/presentation/cubit/planet_cubit.dart';
+import 'package:cosmic/features/favourites/presentation/cubit/favourites_cubit.dart';
+import 'package:cosmic/features/inner_page/presentation/widgets/add_note_part.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,6 +18,7 @@ class PlanetDetailScreen extends StatelessWidget {
     final size = context.media.size;
     final width = size.width;
     final height = size.height;
+
     return BlocProvider(
       create: (_) =>
           PlanetCubit(FirebaseHomeService())..getPlanetByName(planetName),
@@ -29,6 +31,7 @@ class PlanetDetailScreen extends StatelessWidget {
               return Center(child: Text(state.message));
             } else if (state is PlanetSuccess) {
               final planet = state.planet;
+
               return Stack(
                 children: [
                   SizedBox.expand(
@@ -40,14 +43,15 @@ class PlanetDetailScreen extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: height,
+
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.bottomLeft,
                         colors: [
-                          Color(0xff00E5E5).withOpacity(0.1),
-                          Color(0xff72A5F2).withOpacity(0.5),
-                          Color(0xffE961FF).withOpacity(0.7),
+                          const Color(0xff00E5E5).withOpacity(0.1),
+                          const Color(0xff72A5F2).withOpacity(0.5),
+                          const Color(0xffE961FF).withOpacity(0.7),
                         ],
                         stops: const [0.0, 0.5, 1.0],
                       ),
@@ -68,32 +72,38 @@ class PlanetDetailScreen extends StatelessWidget {
                                 0.5,
                               ),
                               child: IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Icon(
+                                onPressed: () => Navigator.pop(context),
+                                icon: const Icon(
                                   Icons.arrow_back,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
-                            CircleAvatar(
-                              radius: 25,
-                              backgroundColor: AppColor.surface.withOpacity(
-                                0.5,
-                              ),
-                              child: IconButton(
-                                onPressed: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    Routes.favouritesScreen,
-                                  );
-                                },
-                                icon: Icon(
-                                  Icons.favorite_border_rounded,
-                                  color: Colors.white,
-                                ),
-                              ),
+
+                            BlocBuilder<FavouritesCubit, FavouritesState>(
+                              builder: (context, favState) {
+                                final favCubit = context
+                                    .read<FavouritesCubit>();
+                                final isFav = favCubit.isFavourite(planet);
+
+                                return CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: AppColor.surface.withOpacity(
+                                    0.5,
+                                  ),
+                                  child: IconButton(
+                                    onPressed: () {
+                                      favCubit.toggleFavourite(planet);
+                                    },
+                                    icon: Icon(
+                                      isFav
+                                          ? Icons.favorite
+                                          : Icons.favorite_border_rounded,
+                                      color: isFav ? Colors.red : Colors.white,
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -110,6 +120,8 @@ class PlanetDetailScreen extends StatelessWidget {
                                 topLeft: Radius.circular(28),
                                 topRight: Radius.circular(28),
                               ),
+                              border: Border.all(color: AppColor.surface),
+
                               boxShadow: [
                                 BoxShadow(
                                   color: AppColor.surface.withOpacity(0.5),
@@ -182,53 +194,7 @@ class PlanetDetailScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      maximumSize: Size(
-                                        width * 146 / 375,
-                                        height * 48 / 812,
-                                      ),
-                                      padding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      shadowColor: Colors.transparent,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                    ),
-                                    onPressed: () {},
-                                    child: Ink(
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topRight,
-                                          end: Alignment.bottomLeft,
-                                          colors: [
-                                            const Color(
-                                              0xff00E5E5,
-                                            ).withOpacity(0.1),
-                                            const Color(
-                                              0xff72A5F2,
-                                            ).withOpacity(0.5),
-                                            const Color(
-                                              0xffE961FF,
-                                            ).withOpacity(0.7),
-                                          ],
-                                          stops: const [0.0, 0.5, 1.0],
-                                        ),
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                          vertical: 12,
-                                        ),
-                                        alignment: Alignment.center,
-                                        child: const Text(
-                                          "Add Note",
-                                          style: AppTextStyles.h2bold24,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  AddNotePart(planetName: planet.name),
                                 ],
                               ),
                             ),
@@ -236,21 +202,12 @@ class PlanetDetailScreen extends StatelessWidget {
                           Positioned(
                             left: (width - 120) / 2,
                             top: -height * 60 / 812,
-                            child: Image.asset(
-                              "assets/images/planet (5).png",
+                            child: Image.network(
+                              planet.image,
                               height: height * 120 / 812,
                               width: width * 120 / 375,
+                              fit: BoxFit.cover,
                             ),
-
-                            // Image.network(
-                            //   planet.image,
-                            //   height: height * 120 / 812,
-                            //   errorBuilder: (_, __, ___) => const Icon(
-                            //     Icons.broken_image,
-                            //     size: 120,
-                            //     color: Colors.grey,
-                            //   ),
-                            // ),
                           ),
                         ],
                       ),
@@ -273,10 +230,8 @@ class PlanetDetailScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(child: Image.asset(icon)),
-
           Text(label, style: AppTextStyles.bady12),
           Text(unit, style: AppTextStyles.bady12),
-
           Text(value, style: AppTextStyles.h2bold24),
         ],
       ),

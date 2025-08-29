@@ -22,6 +22,8 @@ class AppContainer extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColor.surface.withOpacity(0.5),
         borderRadius: BorderRadius.circular(28),
+        border: Border.all(color: AppColor.surface),
+
         boxShadow: [
           BoxShadow(
             color: AppColor.surface.withOpacity(0.5),

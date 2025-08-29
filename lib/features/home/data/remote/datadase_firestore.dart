@@ -149,16 +149,15 @@ class FirebaseHomeService {
   }
 
   Future<PlanetModel> getPlanetOfTheDay() async {
-    final query = await _firestore.collection('planets').orderBy('order').get();
-
-    if (query.docs.isEmpty) {
-      throw Exception("No planets found");
-    }
+    final myPlanets = await _firestore
+        .collection('planets')
+        .orderBy('order')
+        .get();
 
     final day = DateTime.now().day;
-    final index = (day - 1) % query.docs.length;
+    final index = day % myPlanets.docs.length;
 
-    final doc = query.docs[index];
+    final doc = myPlanets.docs[index];
     return PlanetModel.fromJson(doc.data());
   }
 }

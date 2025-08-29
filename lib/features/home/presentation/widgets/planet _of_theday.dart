@@ -41,11 +41,14 @@ class PlanetOfTheday extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: AppColor.surface.withOpacity(0.5),
-                        child: Image.asset("assets/images/planet (3).png"),
+                 
+                      Image.network(
+                        planet.image,
+                        width: width * 80 / 375,
+                        height: height * 80 / 812,
+                        fit: BoxFit.cover,
                       ),
+
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

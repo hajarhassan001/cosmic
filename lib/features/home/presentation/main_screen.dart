@@ -5,12 +5,14 @@ import 'package:cosmic/core/theme/app_text_style.dart';
 import 'package:cosmic/features/favourites/presentation/favourites_screen.dart';
 import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
 import 'package:cosmic/features/home/presentation/home_screen.dart';
+import 'package:cosmic/features/home/presentation/widgets/drawer_part.dart';
 import 'package:cosmic/features/notes/presentation/notes_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  MainScreen({super.key});
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +27,14 @@ class MainScreen extends StatelessWidget {
     ];
 
     final List<String> titles = ["Solar System", "Favourites", "Notes"];
+    
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         final cubit = context.read<HomeCubit>();
 
         return Scaffold(
+          key: _scaffoldKey,
+          drawer: DrawerPart(),
           body: Stack(
             children: [
               SizedBox.expand(
@@ -48,6 +53,8 @@ class MainScreen extends StatelessWidget {
                         bottomLeft: Radius.circular(28),
                         bottomRight: Radius.circular(28),
                       ),
+                                                  border: Border.all(color: AppColor.surface),
+
                       boxShadow: [
                         BoxShadow(
                           color: AppColor.surface.withOpacity(0.5),
@@ -62,19 +69,33 @@ class MainScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        CircleAvatar(
-                          radius: 25,
-                          backgroundColor: AppColor.surface.withOpacity(0.5),
-                          child: Image.asset("assets/images/icon_settings.png"),
+                        GestureDetector(
+                          onTap: () {
+                            _scaffoldKey.currentState?.openDrawer();
+                          },
+                          child: CircleAvatar(
+                            radius: 25,
+                            backgroundColor: AppColor.surface.withOpacity(0.5),
+                            child: Image.asset(
+                              "assets/images/icon_settings.png",
+                            ),
+                          ),
                         ),
                         Text(
                           titles[state.currentIndex],
                           style: AppTextStyles.h1bold32,
                         ),
-                        CircleAvatar(
-                          radius: 25,
-                          backgroundColor: AppColor.surface.withOpacity(0.5),
-                          child: Image.asset("assets/images/icon_profile.png"),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, Routes.profileScreen);
+                          },
+                          child: CircleAvatar(
+                            radius: 25,
+                            backgroundColor: AppColor.surface.withOpacity(0.5),
+                            child: Image.asset(
+                              "assets/images/icon_profile.png",
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -89,6 +110,8 @@ class MainScreen extends StatelessWidget {
                         topLeft: Radius.circular(28),
                         topRight: Radius.circular(28),
                       ),
+                                                  border: Border.all(color: AppColor.surface),
+
                       boxShadow: [
                         BoxShadow(
                           color: AppColor.surface.withOpacity(0.5),
