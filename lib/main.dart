@@ -2,12 +2,14 @@ import 'package:cosmic/core/routing/app_router.dart';
 
 import 'package:cosmic/features/auth/cubit/auth-logic.dart';
 import 'package:cosmic/features/auth/data_base/firebase_functions.dart';
-import 'package:cosmic/features/favourites/data/remote/favourites_firebase.dart';
-import 'package:cosmic/features/favourites/presentation/cubit/favourites_cubit.dart';
+
+import 'package:cosmic/features/favourites/remote/database_firebase.dart';
+
 
 import 'package:cosmic/features/home/data/remote/datadase_firestore.dart';
 
 import 'package:cosmic/features/home/presentation/cubit/home_cubit.dart';
+import 'package:cosmic/features/favourites/cubit/favourites_cubit.dart';
 import 'package:cosmic/features/inner_page/presentation/cubit/planet_cubit.dart';
 import 'package:cosmic/features/notes/data/remote/notes_firebase.dart';
 import 'package:cosmic/features/notes/presentation/cubit/notes_cubit.dart';

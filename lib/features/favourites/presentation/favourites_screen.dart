@@ -2,9 +2,12 @@ import 'package:cosmic/core/extentions/context_extention.dart';
 import 'package:cosmic/core/routing/routes.dart';
 import 'package:cosmic/core/theme/app_colors.dart';
 import 'package:cosmic/core/theme/app_text_style.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cosmic/features/favourites/presentation/cubit/favourites_cubit.dart';
+
+
 
 class FavouritesScreen extends StatelessWidget {
   const FavouritesScreen({super.key});
@@ -62,6 +65,7 @@ class FavouritesScreen extends StatelessWidget {
                     color: AppColor.surface.withOpacity(0.3),
                     borderRadius: BorderRadius.circular(width * 16 / 375),
                     border: Border.all(color: AppColor.surface),
+
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,6 +134,7 @@ class FavouritesScreen extends StatelessWidget {
                               "Details",
                               style: AppTextStyles.bady12.copyWith(
                                 color: AppColor.textPrimary,
+                         
                               ),
                             ),
                             Image.asset(
